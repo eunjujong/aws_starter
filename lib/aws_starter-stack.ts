@@ -7,9 +7,16 @@ export class AwsStarterStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    new s3.Bucket(this, 'MyBucketDev', {
-      versioned: true,
-      bucketName: 'mybucketdev',
-    });
+    const bucketName = 'mybucketdev';
+
+    let bucketDev: s3.IBucket;
+    try {
+      bucketDev = s3.Bucket.fromBucketName(this, 'MyBucketDev', bucketName);
+    } catch {
+      bucketDev = new s3.Bucket(this, 'MyBucketDev', {
+        versioned: true,
+        bucketName: bucketName,
+      });
+    }
   }
 }
