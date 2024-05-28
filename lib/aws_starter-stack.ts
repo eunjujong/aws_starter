@@ -9,7 +9,7 @@ export class AwsStarterStack extends cdk.Stack {
 
     new s3.Bucket(this, 'MyBucketDev', {
       versioned: true,
-      bucketName: 'MyBucketDev',
+      bucketName: 'mybucketdev',
     });
   }
 }
